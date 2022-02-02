@@ -1,4 +1,4 @@
-public class Vezerlo {
+    public class Vezerlo {
 
     enum direction {UP, DOWN;};
     private short floor;
