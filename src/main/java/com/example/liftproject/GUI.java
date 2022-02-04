@@ -1,7 +1,6 @@
 package com.example.liftproject;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -13,8 +12,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 public class GUI extends Application {
 
@@ -50,9 +50,9 @@ public class GUI extends Application {
     VBox vboxS122 = new VBox();
     VBox vboxS123 = new VBox();
     Label fireS = new Label("Tűzérzékelő");
-    Circle fireSCircle = new Circle(20);
+    Circle fireCircleS = new Circle(20);
     Label emergencyS = new Label("Segélyhívó");
-    Circle emergencySCircle = new Circle(20);
+    Circle emergencyCircleS = new Circle(20);
     Label overloadS = new Label("Túlsúly");
     Circle overloadSCircle = new Circle(20);
 
@@ -72,32 +72,60 @@ public class GUI extends Application {
     VBox vboxF2 = new VBox();
     Circle movingCircleF2 = new Circle(5);
     Circle outOfServiceF2 = new Circle(5);
+    Label liftPositionNoF2 = new Label("--");
     Button callLiftDownF2 = new Button();
 
     VBox vboxF1 = new VBox();
     Circle movingCircleF1 = new Circle(5);
     Circle outOfServiceF1 = new Circle(5);
+    Label liftPositionNoF1 = new Label("--");
     Button callLiftUpF1 = new Button();
     Button callLiftDownF1 = new Button();
 
     VBox vboxF0 = new VBox();
     Circle movingCircleF0 = new Circle(5);
     Circle outOfServiceF0 = new Circle(5);
+    Label liftPositionNoF0 = new Label("--");
     Button callLiftUpF0 = new Button();
     Button callLiftDownF0 = new Button();
 
     VBox vboxCellar = new VBox();
     Circle movingCircleCellar = new Circle(5);
     Circle outOfServiceCellar = new Circle(5);
+    Label liftPositionNoCellar = new Label("--");
     Button callLiftUpCellar = new Button();
     Button callLiftDownCellar = new Button();
 
     VBox vboxGarage = new VBox();
     Circle movingCircleGarage = new Circle(5);
     Circle outOfServiceGarage = new Circle(5);
+    Label liftPositionNoGarage = new Label("--");
     Button callLiftUpGarage = new Button();
 
+    HBox hboxLift = new HBox();
     VBox vboxLift = new VBox();
+    VBox vBoxliftButtons = new VBox();
+    Button liftButtonF2 = new Button("2");
+    Button liftButtonF1 = new Button("1");
+    Button liftButtonF0 = new Button("Fsz.");
+    Button liftButtonCellar = new Button("P.");
+    Button liftButtonGarage = new Button("G.");
+
+    VBox vboxLiftArrows = new VBox();
+    Label liftArrowUp = new Label("⇧");
+    Label liftPositionNoLift = new Label("--");
+    Label liftArrowDown = new Label("⇩");
+
+    VBox vboxLiftRightSide = new VBox();
+    Label overloadLift = new Label("Túlsúly jelzés\n13 fő vagy 1000 kg");
+    Label safeGettingOut = new Label("Biztonságos\na kiszállás");
+    HBox hboxDoorButtonsLift = new HBox();
+    Button openDoor = new Button("◁▷");
+    Button closeDoor = new Button("▷◁");
+    HBox hboxLabelsLift = new HBox();
+    HBox hboxEmergencyLineLift = new HBox();
+    Circle fireCircleLift = new Circle(20);
+    Button emergencyButtonLift = new Button();
 
 
     Scene scene = new Scene(vbox);
@@ -109,14 +137,14 @@ public class GUI extends Application {
         primaryStage.setScene(scene);
 
         //Szervízpanel:
-        f2_SCircle.setFill(Color.GRAY);
-        f1_SCircle.setFill(Color.GRAY);
-        f0_SCircle.setFill(Color.GRAY);
-        cellar_SCircle.setFill(Color.GRAY);
-        garage_SCircle.setFill(Color.GRAY);
-        fireSCircle.setFill(Color.GRAY);
-        emergencySCircle.setFill(Color.GRAY);
-        overloadSCircle.setFill(Color.GRAY);
+        f2_SCircle.setFill(Color.LIGHTGRAY);
+        f1_SCircle.setFill(Color.LIGHTGRAY);
+        f0_SCircle.setFill(Color.LIGHTGRAY);
+        cellar_SCircle.setFill(Color.LIGHTGRAY);
+        garage_SCircle.setFill(Color.LIGHTGRAY);
+        fireCircleS.setFill(Color.LIGHTGRAY);
+        emergencyCircleS.setFill(Color.LIGHTGRAY);
+        overloadSCircle.setFill(Color.LIGHTGRAY);
 
         ObservableList S111 = vboxS111.getChildren();
         S111.addAll(f2_S, f2_SCircle);
@@ -144,9 +172,9 @@ public class GUI extends Application {
         hboxS11.setSpacing(10);
 
         ObservableList S121 = vboxS121.getChildren();
-        S121.addAll(fireS, fireSCircle);
+        S121.addAll(fireS, fireCircleS);
         ObservableList S122 = vboxS122.getChildren();
-        S122.addAll(emergencyS, emergencySCircle);
+        S122.addAll(emergencyS, emergencyCircleS);
         ObservableList S123 = vboxS123.getChildren();
         S123.addAll(overloadS, overloadSCircle);
 
@@ -196,64 +224,164 @@ public class GUI extends Application {
 
         //Emeletek paneljai és a lift kabin kezelő gombok vboxF2
         ObservableList FL_F2 = vboxF2.getChildren();
-        FL_F2.addAll(new Label("2. EMELET"), new Label("Foglalt-Mozgásban"), movingCircleF2, new Label("Üzemen kívül"), outOfServiceF2, new Label(" "), callLiftDownF2);
+        FL_F2.addAll(new Label("2. EMELET"), new Label("Foglalt-Mozgásban"), movingCircleF2, new Label("Üzemen kívül"), outOfServiceF2, liftPositionNoF2, new Label(" "), callLiftDownF2);
         movingCircleF2.setFill(Color.GRAY);
         outOfServiceF2.setFill(Color.GRAY);
+        liftPositionNoF2.setMinWidth(50);
+        liftPositionNoF2.setMinHeight(50);
+        liftPositionNoF2.setAlignment(Pos.CENTER);
+        liftPositionNoF2.setStyle("-fx-border-color:black");
         callLiftDownF2.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: gray;");
 
         ObservableList FL_F1 = vboxF1.getChildren();
-        FL_F1.addAll(new Label("1. EMELET"), new Label("Foglalt-Mozgásban"), movingCircleF1, new Label("Üzemen kívül"), outOfServiceF1, callLiftUpF1, callLiftDownF1);
+        FL_F1.addAll(new Label("1. EMELET"), new Label("Foglalt-Mozgásban"), movingCircleF1, new Label("Üzemen kívül"), outOfServiceF1, liftPositionNoF1, callLiftUpF1, callLiftDownF1);
         movingCircleF1.setFill(Color.GRAY);
         outOfServiceF1.setFill(Color.GRAY);
+        liftPositionNoF1.setMinWidth(50);
+        liftPositionNoF1.setMinHeight(50);
+        liftPositionNoF1.setAlignment(Pos.CENTER);
+        liftPositionNoF1.setStyle("-fx-border-color:black");
         callLiftUpF1.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: gray;");
         callLiftDownF1.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: gray;");
 
         ObservableList FL_F0 = vboxF0.getChildren();
-        FL_F0.addAll(new Label("FÖLDSZINT"), new Label("Foglalt-Mozgásban"), movingCircleF0, new Label("Üzemen kívül"), outOfServiceF0, callLiftUpF0, callLiftDownF0);
+        FL_F0.addAll(new Label("FÖLDSZINT"), new Label("Foglalt-Mozgásban"), movingCircleF0, new Label("Üzemen kívül"), outOfServiceF0, liftPositionNoF0, callLiftUpF0, callLiftDownF0);
         movingCircleF0.setFill(Color.GRAY);
         outOfServiceF0.setFill(Color.GRAY);
+        liftPositionNoF0.setMinWidth(50);
+        liftPositionNoF0.setMinHeight(50);
+        liftPositionNoF0.setAlignment(Pos.CENTER);
+        liftPositionNoF0.setStyle("-fx-border-color:black");
         callLiftUpF0.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: gray;");
         callLiftDownF0.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: gray;");
 
         ObservableList FL_Cellar = vboxCellar.getChildren();
-        FL_Cellar.addAll(new Label("PINCE"), new Label("Foglalt-Mozgásban"), movingCircleCellar, new Label("Üzemen kívül"), outOfServiceCellar, callLiftUpCellar, callLiftDownCellar);
+        FL_Cellar.addAll(new Label("PINCE"), new Label("Foglalt-Mozgásban"), movingCircleCellar, new Label("Üzemen kívül"), outOfServiceCellar, liftPositionNoCellar, callLiftUpCellar, callLiftDownCellar);
         movingCircleCellar.setFill(Color.GRAY);
         outOfServiceCellar.setFill(Color.GRAY);
+        liftPositionNoCellar.setMinWidth(50);
+        liftPositionNoCellar.setMinHeight(50);
+        liftPositionNoCellar.setAlignment(Pos.CENTER);
+        liftPositionNoCellar.setStyle("-fx-border-color:black");
         callLiftUpCellar.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: gray;");
         callLiftDownCellar.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: gray;");
 
         ObservableList FL_Garage = vboxGarage.getChildren();
-        FL_Garage.addAll(new Label("PARKOLÓ"), new Label("Foglalt-Mozgásban"), movingCircleGarage, new Label("Üzemen kívül"), outOfServiceGarage, callLiftUpGarage);
+        FL_Garage.addAll(new Label("PARKOLÓ"), new Label("Foglalt-Mozgásban"), movingCircleGarage, new Label("Üzemen kívül"), outOfServiceGarage, liftPositionNoGarage, callLiftUpGarage);
         movingCircleGarage.setFill(Color.GRAY);
         outOfServiceGarage.setFill(Color.GRAY);
+        liftPositionNoGarage.setMinWidth(50);
+        liftPositionNoGarage.setMinHeight(50);
+        liftPositionNoGarage.setAlignment(Pos.CENTER);
+        liftPositionNoGarage.setStyle("-fx-border-color:black");
         callLiftUpGarage.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: gray;");
 
+        //Lift panel:
+        ObservableList liftButtonList = vBoxliftButtons.getChildren();
+        liftButtonList.addAll(liftButtonF2, liftButtonF1, liftButtonF0, liftButtonCellar, liftButtonGarage);
+        liftButtonF2.setShape(new Circle(40));
+        liftButtonF2.setPrefSize(40,40);
+        liftButtonF1.setShape(new Circle(40));
+        liftButtonF1.setPrefSize(40,40);
+        liftButtonF0.setShape(new Circle(40));
+        liftButtonF0.setPrefSize(40,40);
+        liftButtonCellar.setShape(new Circle(40));
+        liftButtonCellar.setPrefSize(40,40);
+        liftButtonGarage.setShape(new Circle(40));
+        liftButtonGarage.setPrefSize(40,40);
+        vBoxliftButtons.setAlignment(Pos.BOTTOM_CENTER);
+        vBoxliftButtons.setSpacing(5);
+
+        ObservableList liftArrowList = vboxLiftArrows.getChildren();
+        liftArrowList.addAll(liftArrowUp, liftPositionNoLift, liftArrowDown);
+        liftArrowUp.setFont(new Font("Arial", 50));
+        liftArrowDown.setFont(new Font("Arial", 50));
+        liftPositionNoLift.setMinWidth(50);
+        liftPositionNoLift.setMinHeight(50);
+        liftPositionNoLift.setAlignment(Pos.CENTER);
+        liftPositionNoLift.setStyle("-fx-border-color:black");
+        vboxLiftArrows.setAlignment(Pos.CENTER);
+
+        ObservableList doorButtonsLiftList = hboxDoorButtonsLift.getChildren();
+        doorButtonsLiftList.addAll(openDoor, closeDoor);
+        openDoor.setShape(new Circle(20));
+        openDoor.setPrefSize(50,50);
+        openDoor.setFont(new Font("Arial", 20));
+        openDoor.setAlignment(Pos.CENTER);
+        closeDoor.setShape(new Circle(20));
+        closeDoor.setPrefSize(50,50);
+        closeDoor.setFont(new Font("Arial", 20));
+        openDoor.setAlignment(Pos.CENTER);
+        hboxDoorButtonsLift.setSpacing(5);
+        hboxDoorButtonsLift.setAlignment(Pos.CENTER);
+
+        ObservableList LabelsList = hboxLabelsLift.getChildren();
+        LabelsList.addAll(new Label("Tűzjelzés"), new Label("Vészjelző"));
+        hboxLabelsLift.setSpacing(10);
+        hboxLabelsLift.setAlignment(Pos.CENTER);
+
+        ObservableList emergencyLineLiftList = hboxEmergencyLineLift.getChildren();
+        emergencyLineLiftList.addAll(fireCircleLift, emergencyButtonLift);
+        fireCircleLift.setFill(Color.GRAY);
+        emergencyButtonLift.setShape(new Circle(20));
+        emergencyButtonLift.setPrefSize(40,40);
+        emergencyButtonLift.setStyle("-fx-background-color:red");
+        hboxEmergencyLineLift.setSpacing(20);
+        hboxEmergencyLineLift.setAlignment(Pos.CENTER);
+
+        ObservableList LiftRightSideList = vboxLiftRightSide.getChildren();
+        LiftRightSideList.addAll(overloadLift, safeGettingOut, hboxDoorButtonsLift, hboxLabelsLift, hboxEmergencyLineLift);
+        overloadLift.setMinWidth(150);
+        overloadLift.setMinHeight(50);
+        overloadLift.setAlignment(Pos.CENTER);
+        overloadLift.setTextAlignment(TextAlignment.CENTER);
+        overloadLift.setStyle("-fx-border-color:black; -fx-background-color:darkseagreen");
+        safeGettingOut.setMinWidth(150);
+        safeGettingOut.setMinHeight(50);
+        safeGettingOut.setAlignment(Pos.CENTER);
+        safeGettingOut.setTextAlignment(TextAlignment.CENTER);
+        safeGettingOut.setStyle("-fx-border-color:black; -fx-background-color:lightgray");
+        vboxLiftRightSide.setSpacing(15);
+        vboxLiftRightSide.setAlignment(Pos.BOTTOM_CENTER);
+
+
+        ObservableList liftList = hboxLift.getChildren();
+        liftList.addAll(vBoxliftButtons, vboxLiftArrows, vboxLiftRightSide);
+        vBoxliftButtons.setAlignment(Pos.CENTER);
+        vboxLiftArrows.setAlignment(Pos.CENTER);
+        hboxLift.setSpacing(20);
+        hboxLift.setPadding(new Insets(20, 0, 0, 0));
+        hboxLift.setAlignment(Pos.CENTER);
+        ObservableList liftList2 = vboxLift.getChildren();
+        liftList2.addAll(new Label("Lift kabin kezelő gombok"), hboxLift);
+
+        //Emeletek és lift panel egymás mellett:
         ObservableList FL = hboxFL.getChildren();
-        FL.addAll(vboxF2, vboxF1, vboxF0, vboxCellar, vboxGarage);
+        FL.addAll(vboxF2, vboxF1, vboxF0, vboxCellar, vboxGarage, vboxLift);
         hboxFL.setSpacing(10);
         vboxF2.setSpacing(10);
-        vboxF2.setPadding(new Insets(20, 20, 10, 10));
+        vboxF2.setPadding(new Insets(10, 20, 10, 10));
         vboxF2.setAlignment(Pos.TOP_CENTER);
         vboxF2.setStyle("-fx-border-color:black");
         vboxF1.setSpacing(10);
-        vboxF1.setPadding(new Insets(20, 20, 10, 10));
+        vboxF1.setPadding(new Insets(10, 20, 10, 10));
         vboxF1.setAlignment(Pos.TOP_CENTER);
         vboxF1.setStyle("-fx-border-color:black");
         vboxF0.setSpacing(10);
-        vboxF0.setPadding(new Insets(20, 20, 10, 10));
+        vboxF0.setPadding(new Insets(10, 20, 10, 10));
         vboxF0.setAlignment(Pos.TOP_CENTER);
         vboxF0.setStyle("-fx-border-color:black");
         vboxCellar.setSpacing(10);
-        vboxCellar.setPadding(new Insets(20, 20, 10, 10));
+        vboxCellar.setPadding(new Insets(10, 20, 10, 10));
         vboxCellar.setAlignment(Pos.TOP_CENTER);
         vboxCellar.setStyle("-fx-border-color:black");
         vboxGarage.setSpacing(10);
-        vboxGarage.setPadding(new Insets(20, 20, 10, 10));
+        vboxGarage.setPadding(new Insets(10, 20, 10, 10));
         vboxGarage.setAlignment(Pos.TOP_CENTER);
         vboxGarage.setStyle("-fx-border-color:black");
+        vboxLift.setPadding(new Insets(10, 20, 10, 10));
+        vboxLift.setStyle("-fx-border-color:black");
 
-
-        //ide jön még a lift panel
 
 
         //Teszt panel:
