@@ -2,6 +2,8 @@ package com.example.liftproject;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -65,7 +67,7 @@ public class GUI extends Application {
 
     VBox vboxS3 = new VBox();
     RadioButton mainSwitch = new RadioButton("Főkapcsoló");
-    RadioButton doorEmergencyOpener = new RadioButton("Ajtó vésznyitó");
+    Button doorEmergencyOpener = new Button("Ajtó vésznyitó");
 
     //hboxFL-ben (FL: Floors&Lift) vannak az emeletek paneljai és a lift kabin kezelő gombok, ezek mind vbox-ok
     HBox hboxFL = new HBox();
@@ -130,11 +132,12 @@ public class GUI extends Application {
 
     Scene scene = new Scene(vbox);
 
-
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Lift simulation");
         primaryStage.setScene(scene);
+
+        mainSwitch.setSelected(true);
 
         //Szervízpanel:
         f2_SCircle.setFill(Color.LIGHTGRAY);
@@ -224,7 +227,7 @@ public class GUI extends Application {
 
         //Emeletek paneljai és a lift kabin kezelő gombok vboxF2
         ObservableList FL_F2 = vboxF2.getChildren();
-        FL_F2.addAll(new Label("2. EMELET"), new Label("Foglalt-Mozgásban"), movingCircleF2, new Label("Üzemen kívül"), outOfServiceF2, liftPositionNoF2, new Label(" "), callLiftDownF2);
+        FL_F2.addAll(new Label("2. EMELET\n "), new Label("Foglalt-Mozgásban"), movingCircleF2, new Label("Üzemen kívül"), outOfServiceF2, new Label(" "), liftPositionNoF2, new Label(" "), callLiftDownF2);
         movingCircleF2.setFill(Color.GRAY);
         outOfServiceF2.setFill(Color.GRAY);
         liftPositionNoF2.setMinWidth(50);
@@ -234,7 +237,7 @@ public class GUI extends Application {
         callLiftDownF2.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: gray;");
 
         ObservableList FL_F1 = vboxF1.getChildren();
-        FL_F1.addAll(new Label("1. EMELET"), new Label("Foglalt-Mozgásban"), movingCircleF1, new Label("Üzemen kívül"), outOfServiceF1, liftPositionNoF1, callLiftUpF1, callLiftDownF1);
+        FL_F1.addAll(new Label("1. EMELET\n "), new Label("Foglalt-Mozgásban"), movingCircleF1, new Label("Üzemen kívül"), outOfServiceF1, new Label(" "), liftPositionNoF1, callLiftUpF1, callLiftDownF1);
         movingCircleF1.setFill(Color.GRAY);
         outOfServiceF1.setFill(Color.GRAY);
         liftPositionNoF1.setMinWidth(50);
@@ -245,7 +248,7 @@ public class GUI extends Application {
         callLiftDownF1.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: gray;");
 
         ObservableList FL_F0 = vboxF0.getChildren();
-        FL_F0.addAll(new Label("FÖLDSZINT"), new Label("Foglalt-Mozgásban"), movingCircleF0, new Label("Üzemen kívül"), outOfServiceF0, liftPositionNoF0, callLiftUpF0, callLiftDownF0);
+        FL_F0.addAll(new Label("FÖLDSZINT\n "), new Label("Foglalt-Mozgásban"), movingCircleF0, new Label("Üzemen kívül"), outOfServiceF0, new Label(" "), liftPositionNoF0, callLiftUpF0, callLiftDownF0);
         movingCircleF0.setFill(Color.GRAY);
         outOfServiceF0.setFill(Color.GRAY);
         liftPositionNoF0.setMinWidth(50);
@@ -256,7 +259,7 @@ public class GUI extends Application {
         callLiftDownF0.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: gray;");
 
         ObservableList FL_Cellar = vboxCellar.getChildren();
-        FL_Cellar.addAll(new Label("PINCE"), new Label("Foglalt-Mozgásban"), movingCircleCellar, new Label("Üzemen kívül"), outOfServiceCellar, liftPositionNoCellar, callLiftUpCellar, callLiftDownCellar);
+        FL_Cellar.addAll(new Label("PINCE\n "), new Label("Foglalt-Mozgásban"), movingCircleCellar, new Label("Üzemen kívül"), outOfServiceCellar, new Label(" "), liftPositionNoCellar, callLiftUpCellar, callLiftDownCellar);
         movingCircleCellar.setFill(Color.GRAY);
         outOfServiceCellar.setFill(Color.GRAY);
         liftPositionNoCellar.setMinWidth(50);
@@ -267,7 +270,7 @@ public class GUI extends Application {
         callLiftDownCellar.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: gray;");
 
         ObservableList FL_Garage = vboxGarage.getChildren();
-        FL_Garage.addAll(new Label("PARKOLÓ"), new Label("Foglalt-Mozgásban"), movingCircleGarage, new Label("Üzemen kívül"), outOfServiceGarage, liftPositionNoGarage, callLiftUpGarage);
+        FL_Garage.addAll(new Label("GARÁZS\n "), new Label("Foglalt-Mozgásban"), movingCircleGarage, new Label("Üzemen kívül"), outOfServiceGarage, new Label(" "), liftPositionNoGarage, callLiftUpGarage);
         movingCircleGarage.setFill(Color.GRAY);
         outOfServiceGarage.setFill(Color.GRAY);
         liftPositionNoGarage.setMinWidth(50);
@@ -325,7 +328,7 @@ public class GUI extends Application {
         fireCircleLift.setFill(Color.GRAY);
         emergencyButtonLift.setShape(new Circle(20));
         emergencyButtonLift.setPrefSize(40,40);
-        emergencyButtonLift.setStyle("-fx-background-color:red");
+        emergencyButtonLift.setStyle("-fx-background-color:INDIANRED");
         hboxEmergencyLineLift.setSpacing(20);
         hboxEmergencyLineLift.setAlignment(Pos.CENTER);
 
@@ -396,8 +399,150 @@ public class GUI extends Application {
 
         primaryStage.show();
 
-
+        mainSwitch.setOnAction(event);
+        doorEmergencyOpener.setOnAction(event);
+        callLiftDownF2.setOnAction(event);
+        callLiftUpF1.setOnAction(event);
+        callLiftDownF1.setOnAction(event);
+        callLiftUpF0.setOnAction(event);
+        callLiftDownF0.setOnAction(event);
+        callLiftUpCellar.setOnAction(event);
+        callLiftDownCellar.setOnAction(event);
+        callLiftUpGarage.setOnAction(event);
+        liftButtonF2.setOnAction(event);
+        liftButtonF1.setOnAction(event);
+        liftButtonF0.setOnAction(event);
+        liftButtonCellar.setOnAction(event);
+        liftButtonGarage.setOnAction(event);
+        openDoor.setOnAction(event);
+        closeDoor.setOnAction(event);
+        emergencyButtonLift.setOnAction(event);
     }
+
+    EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent actionEvent) {
+            // Lift szervíz panel gombjainak megnyomása
+            if (actionEvent.getSource() == mainSwitch) {
+                System.out.println("mainSwitch");
+            }
+            if (actionEvent.getSource() == doorEmergencyOpener) {
+            }
+
+            // Emeleti hívó gombok megnyomása
+            if (actionEvent.getSource() == callLiftDownF2) {
+                callLiftDownF2.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GOLD;");
+                callLiftUpF1.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GRAY;");
+                callLiftDownF1.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GRAY;");
+                callLiftUpF0.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GRAY;");
+                callLiftDownF0.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GRAY;");
+                callLiftUpCellar.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GRAY;");
+                callLiftDownCellar.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GRAY;");
+                callLiftUpGarage.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GRAY;");
+            }
+            if (actionEvent.getSource() == callLiftUpF1) {
+                callLiftUpF1.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GOLD;");
+                callLiftDownF2.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GRAY;");
+                callLiftDownF1.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GRAY;");
+                callLiftUpF0.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GRAY;");
+                callLiftDownF0.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GRAY;");
+                callLiftUpCellar.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GRAY;");
+                callLiftDownCellar.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GRAY;");
+                callLiftUpGarage.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GRAY;");
+            }
+            if (actionEvent.getSource() == callLiftDownF1) {
+                callLiftDownF1.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GOLD;");
+                callLiftDownF2.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GRAY;");
+                callLiftUpF1.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GRAY;");
+                callLiftUpF0.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GRAY;");
+                callLiftDownF0.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GRAY;");
+                callLiftUpCellar.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GRAY;");
+                callLiftDownCellar.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GRAY;");
+                callLiftUpGarage.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GRAY;");
+            }
+            if (actionEvent.getSource() == callLiftUpF0) {
+                callLiftUpF0.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GOLD;");
+                callLiftDownF2.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GRAY;");
+                callLiftUpF1.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GRAY;");
+                callLiftDownF1.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GRAY;");
+                callLiftDownF0.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GRAY;");
+                callLiftUpCellar.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GRAY;");
+                callLiftDownCellar.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GRAY;");
+                callLiftUpGarage.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GRAY;");
+            }
+            if (actionEvent.getSource() == callLiftDownF0) {
+                callLiftDownF0.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GOLD;");
+                callLiftDownF2.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GRAY;");
+                callLiftUpF1.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GRAY;");
+                callLiftDownF1.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GRAY;");
+                callLiftUpF0.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GRAY;");
+                callLiftUpCellar.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GRAY;");
+                callLiftDownCellar.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GRAY;");
+                callLiftUpGarage.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GRAY;");
+            }
+            if (actionEvent.getSource() == callLiftUpCellar) {
+                callLiftUpCellar.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GOLD;");
+                callLiftDownF2.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GRAY;");
+                callLiftUpF1.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GRAY;");
+                callLiftDownF1.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GRAY;");
+                callLiftUpF0.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GRAY;");
+                callLiftDownF0.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GRAY;");
+                callLiftDownCellar.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GRAY;");
+                callLiftUpGarage.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GRAY;");
+            }
+            if (actionEvent.getSource() == callLiftDownCellar) {
+                callLiftDownCellar.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GOLD;");
+                callLiftDownF2.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GRAY;");
+                callLiftUpF1.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GRAY;");
+                callLiftDownF1.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GRAY;");
+                callLiftUpF0.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GRAY;");
+                callLiftDownF0.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GRAY;");
+                callLiftUpCellar.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GRAY;");
+                callLiftUpGarage.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GRAY;");
+            }
+            if (actionEvent.getSource() == callLiftUpGarage) {
+                callLiftUpGarage.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GOLD;");
+                callLiftDownF2.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GRAY;");
+                callLiftUpF1.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GRAY;");
+                callLiftDownF1.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GRAY;");
+                callLiftUpF0.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GRAY;");
+                callLiftDownF0.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GRAY;");
+                callLiftUpCellar.setStyle("-fx-shape: 'M 50 0 100 20 0 20 z'; -fx-background-color: GRAY;");
+                callLiftDownCellar.setStyle("-fx-shape: 'M 0 0 100 0 50 100 z'; -fx-background-color: GRAY;");
+            }
+
+            // Lift emeletjelző gombok megnyomása
+            if (actionEvent.getSource() == liftButtonF2) {
+                liftButtonF2.setStyle("-fx-background-color:GOLD");
+            }
+            if (actionEvent.getSource() == liftButtonF1) {
+                liftButtonF1.setStyle("-fx-background-color:GOLD");
+            }
+            if (actionEvent.getSource() == liftButtonF0) {
+                liftButtonF0.setStyle("-fx-background-color:GOLD");
+            }
+            if (actionEvent.getSource() == liftButtonCellar) {
+                liftButtonCellar.setStyle("-fx-background-color:GOLD");
+            }
+            if (actionEvent.getSource() == liftButtonGarage) {
+                liftButtonGarage.setStyle("-fx-background-color:GOLD");
+            }
+
+            // Liftben ajtó nyitó és záró gombok megnyomása
+            if (actionEvent.getSource() == openDoor) {
+                openDoor.setStyle("-fx-border-color:GOLD");
+                closeDoor.setStyle("");
+            }
+            if (actionEvent.getSource() == closeDoor) {
+                closeDoor.setStyle("-fx-border-color:GOLD");
+                openDoor.setStyle("");
+            }
+
+            //Liftben vészjelző:
+            if (actionEvent.getSource() == emergencyButtonLift) {
+                emergencyButtonLift.setStyle("-fx-border-color:RED");
+            }
+
+        }
+    };
 }
-
-
