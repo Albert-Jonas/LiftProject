@@ -1,102 +1,102 @@
 package com.example.liftproject.bozso;
 
 public class kijelzok {
-    boolean tuzjelzo;
-    boolean segelyHivo;
-    boolean tulsuly;
+    boolean istuzjelzo;
+    boolean issegelyHivo;
+    boolean istulsuly;
 
-    boolean fogglaltsag;
-    boolean uzemenKivul;
+    boolean isfogglaltsag;
+    boolean isuzemenKivul;
 
-    boolean emelet_2;
-    boolean emelet_1;
-    boolean emelet_FSZ;
-    boolean emelet_pince;
-    boolean emelet_parkolo;
+    boolean isemelet_2;
+    boolean isemelet_1;
+    boolean isemelet_FSZ;
+    boolean isemelet_pince;
+    boolean isemelet_parkolo;
 
     int ajtoNyitas;
 
     public kijelzok() {
     }
 
-    public boolean isTuzjelzo() {
-        return tuzjelzo;
+    public boolean isIstuzjelzo() {
+        return istuzjelzo;
     }
 
-    public void setTuzjelzo(boolean tuzjelzo) {
-        this.tuzjelzo = tuzjelzo;
+    public void setIstuzjelzo(boolean istuzjelzo) {
+        this.istuzjelzo = istuzjelzo;
     }
 
-    public boolean isSegelyHivo() {
-        return segelyHivo;
+    public boolean isIssegelyHivo() {
+        return issegelyHivo;
     }
 
-    public void setSegelyHivo(boolean segelyHivo) {
-        this.segelyHivo = segelyHivo;
+    public void setIssegelyHivo(boolean issegelyHivo) {
+        this.issegelyHivo = issegelyHivo;
     }
 
-    public boolean isTulsuly() {
-        return tulsuly;
+    public boolean isIstulsuly() {
+        return istulsuly;
     }
 
-    public void setTulsuly(boolean tulsuly) {
-        this.tulsuly = tulsuly;
+    public void setIstulsuly(boolean istulsuly) {
+        this.istulsuly = istulsuly;
     }
 
-    public boolean isFogglaltsag() {
-        return fogglaltsag;
+    public boolean isIsfogglaltsag() {
+        return isfogglaltsag;
     }
 
-    public void setFogglaltsag(boolean fogglaltsag) {
-        this.fogglaltsag = fogglaltsag;
+    public void setIsfogglaltsag(boolean isfogglaltsag) {
+        this.isfogglaltsag = isfogglaltsag;
     }
 
-    public boolean isUzemenKivul() {
-        return uzemenKivul;
+    public boolean isIsuzemenKivul() {
+        return isuzemenKivul;
     }
 
-    public void setUzemenKivul(boolean uzemenKivul) {
-        this.uzemenKivul = uzemenKivul;
+    public void setIsuzemenKivul(boolean isuzemenKivul) {
+        this.isuzemenKivul = isuzemenKivul;
     }
 
-    public boolean isEmelet_2() {
-        return emelet_2;
+    public boolean isIsemelet_2() {
+        return isemelet_2;
     }
 
-    public void setEmelet_2(boolean emelet_2) {
-        this.emelet_2 = emelet_2;
+    public void setIsemelet_2(boolean isemelet_2) {
+        this.isemelet_2 = isemelet_2;
     }
 
-    public boolean isEmelet_1() {
-        return emelet_1;
+    public boolean isIsemelet_1() {
+        return isemelet_1;
     }
 
-    public void setEmelet_1(boolean emelet_1) {
-        this.emelet_1 = emelet_1;
+    public void setIsemelet_1(boolean isemelet_1) {
+        this.isemelet_1 = isemelet_1;
     }
 
-    public boolean isEmelet_FSZ() {
-        return emelet_FSZ;
+    public boolean isIsemelet_FSZ() {
+        return isemelet_FSZ;
     }
 
-    public void setEmelet_FSZ(boolean emelet_FSZ) {
-        this.emelet_FSZ = emelet_FSZ;
+    public void setIsemelet_FSZ(boolean isemelet_FSZ) {
+        this.isemelet_FSZ = isemelet_FSZ;
     }
 
-    public boolean isEmelet_pince() {
-        return emelet_pince;
+    public boolean isIsemelet_pince() {
+        return isemelet_pince;
     }
 
-    public void setEmelet_pince(boolean emelet_pince) {
-        this.emelet_pince = emelet_pince;
+    public void setIsemelet_pince(boolean isemelet_pince) {
+        this.isemelet_pince = isemelet_pince;
     }
 
-    public boolean isEmelet_parkolo() {
-        return emelet_parkolo;
+    public boolean isIsemelet_parkolo() {
+        return isemelet_parkolo;
     }
 
-    public void setEmelet_parkolo(boolean emelet_parkolo) {
-        this.emelet_parkolo = emelet_parkolo;
+    public void setIsemelet_parkolo(boolean isemelet_parkolo) {
+        this.isemelet_parkolo = isemelet_parkolo;
     }
 
     public int getAjtoNyitas() {
@@ -110,16 +110,16 @@ public class kijelzok {
     @Override
     public String toString() {
         return "kijelzok{" +
-                "tuzjelzo=" + tuzjelzo +
-                ", segelyHivo=" + segelyHivo +
-                ", tulsuly=" + tulsuly +
-                ", fogglaltsag=" + fogglaltsag +
-                ", uzemenKivul=" + uzemenKivul +
-                ", emelet_2=" + emelet_2 +
-                ", emelet_1=" + emelet_1 +
-                ", emelet_FSZ=" + emelet_FSZ +
-                ", emelet_pince=" + emelet_pince +
-                ", emelet_parkolo=" + emelet_parkolo +
+                "istuzjelzo=" + istuzjelzo +
+                ", issegelyHivo=" + issegelyHivo +
+                ", istulsuly=" + istulsuly +
+                ", isfogglaltsag=" + isfogglaltsag +
+                ", isuzemenKivul=" + isuzemenKivul +
+                ", isemelet_2=" + isemelet_2 +
+                ", isemelet_1=" + isemelet_1 +
+                ", isemelet_FSZ=" + isemelet_FSZ +
+                ", isemelet_pince=" + isemelet_pince +
+                ", isemelet_parkolo=" + isemelet_parkolo +
                 ", ajtoNyitas=" + ajtoNyitas +
                 '}';
     }
