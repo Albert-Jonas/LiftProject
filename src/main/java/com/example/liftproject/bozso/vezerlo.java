@@ -67,5 +67,15 @@ public class vezerlo {
         this.openDoorNow = openDoorNow;
     }
 
-
+    @Override
+    public String toString() {
+        return "vezerlo{" +
+                "floor=" + floor +
+                ", direction=" + direction +
+                ", ismoving=" + ismoving +
+                ", isOpenable=" + isOpenable +
+                ", isCloseable=" + isCloseable +
+                ", openDoorNow=" + openDoorNow +
+                '}';
+    }
 }
