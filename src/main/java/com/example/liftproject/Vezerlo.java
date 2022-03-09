@@ -1,3 +1,5 @@
+package com.example.liftproject;
+
 public class Vezerlo {
 
     enum direction {UP, DOWN;};
